@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  {% include head.html %}
+  <body class="theme-root">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="photo-square">
+          {% if page.photo %}
+            <img src="{{ page.photo }}" alt="{{ page.name }}" loading="lazy" />
+          {% else %}
+            <svg class="placeholder" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="profile placeholder">
+              <rect width="100" height="100" rx="8" fill="var(--muted)" />
+              <text x="50" y="55" text-anchor="middle" font-size="32" fill="var(--bg)">{{ site.title | slice:0,1 | upcase }}</text>
+            </svg>
+          {% endif %}
+        </div>
+        <div class="hero-meta">
+          <h1 class="name">{{ page.name | default: site.title }}</h1>
+          <p class="role">{{ page.title | default: site.description }}</p>
+          <div class="hero-actions">
+            {% if page.cv %}<a class="btn" href="{{ page.cv }}" target="_blank" rel="noopener">Download CV</a>{% endif %}
+            <button id="theme-toggle" class="btn btn-ghost" aria-pressed="false">Toggle theme</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="bio">
+        <h2>About</h2>
+        <div class="bio-text">{{ page.bio | default: site.bio }}</div>
+      </section>
+
+      <section class="social">
+        <h3>Connect</h3>
+        <ul class="social-list">
+          {% for s in page.social %}
+            <li><a href="{{ s.url }}" class="social-link">{{ s.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <small>&copy; {{ 'now' | date: "%Y" }} {{ site.author | default: site.title }}</small>
+    </footer>
+
+    <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
+  </body>
+</html>
