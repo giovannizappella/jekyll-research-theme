@@ -2,6 +2,14 @@
 <html lang="en">
   {% include head.html %}
   <body class="theme-root">
+    <nav class="social-bar" aria-label="social links">
+      <ul>
+        {% for s in page.social %}
+          <li><a href="{{ s.url }}" class="social-icon" title="{{ s.name }}" target="_blank" rel="noopener">{{ s.name | slice:0,1 }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
     <header class="hero">
       <div class="hero-inner">
         <div class="photo-square">
@@ -14,9 +22,11 @@
             </svg>
           {% endif %}
         </div>
+
         <div class="hero-meta">
           <h1 class="name">{{ page.name | default: site.title }}</h1>
           <p class="role">{{ page.title | default: site.description }}</p>
+          <p class="lead">{{ page.lead | default: site.lead }}</p>
           <div class="hero-actions">
             {% if page.cv %}<a class="btn" href="{{ page.cv }}" target="_blank" rel="noopener">Download CV</a>{% endif %}
             <button id="theme-toggle" class="btn btn-ghost" aria-pressed="false">Toggle theme</button>
